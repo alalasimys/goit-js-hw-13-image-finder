@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>goit-js-hw-13-image-finder</title>
+  </head>
+  <body>
+    <form class="search-form js-search-form">
+      <div class="form-group">
+        <label for="searchQuery" class="sr-only">Enter your query</label>
+        <input
+          type="text"
+          class="form-control"
+          name="query"
+          id="searchQuery"
+          placeholder="Search images..."
+          autocomplete="off"
+        />
+      </div>
+      <button type="submit" class="btn">Find</button>
+    </form>
+
+    <ul class="gallery js-gallery-container"></ul>
+
+    <button type="button" class="btn loader" data-action="load-more">
+      <span class="is-hidden" role="status" aria-hidden="true"></span>
+
+      <span class="label">Show more</span>
+    </button>
+  </body>
+</html>
