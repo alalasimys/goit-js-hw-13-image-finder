@@ -8,30 +8,55 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!-- <link rel="stylesheet" href="dist/basicLightbox.min.css" /> -->
     <title>goit-js-hw-13-image-finder</title>
   </head>
   <body>
-    <form class="search-form js-search-form">
-      <div class="form-group">
-        <label for="searchQuery" class="sr-only">Enter your query</label>
-        <input
-          type="text"
-          class="form-control"
-          name="query"
-          id="searchQuery"
-          placeholder="Search images..."
-          autocomplete="off"
-        />
+    <div class="container">
+      <form class="search-form js-search-form">
+        <label for="searchQuery" class="sr-only"
+          >We will find everything ! <br />
+          Please enter your query</label
+        >
+        <div class="input-container">
+          <input
+            type="text"
+            class="form-control"
+            name="query"
+            id="searchQuery"
+            placeholder="Search images..."
+            autocomplete="off"
+          />
+
+          <button type="submit" class="btn">Find</button>
+        </div>
+      </form>
+
+      <ul class="gallery js-gallery-container"></ul>
+      <!--<div class="backdrop is-hidden" data-modal>
+        <div class="modal">
+          <button type="button" class="close-modal" data-modal-close>
+            <img src="images/close-button.svg" alt="Close window" />
+          </button>
+        </div>
+      </div>-->
+      <div class="lightbox js-lightbox">
+        <div class="lightbox__overlay"></div>
+
+        <div class="lightbox__content">
+          <img class="lightbox__image" />
+        </div>
       </div>
-      <button type="submit" class="btn">Find</button>
-    </form>
 
-    <ul class="gallery js-gallery-container"></ul>
+      <button
+        type="button"
+        class="btn loader is-hidden"
+        data-action="load-more"
+      >
+        <span class="is-hidden" role="status" aria-hidden="true"></span>
 
-    <button type="button" class="btn loader" data-action="load-more">
-      <span class="is-hidden" role="status" aria-hidden="true"></span>
-
-      <span class="label">Show more</span>
-    </button>
+        <span class="label">Show more</span>
+      </button>
+    </div>
   </body>
 </html>
