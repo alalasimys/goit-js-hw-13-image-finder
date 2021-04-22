@@ -1,4 +1,4 @@
-import { info, error } from '@pnotify/core';
+import { info, error, Stack } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 
@@ -9,6 +9,13 @@ import './styles.css';
 import pictureCardTmpl from './templates/pictureCardTmpl.hbs';
 import PicturesApiServices from './js/apiService';
 import onOpenModalImage from './js/components/modal';
+
+const myStack = new Stack({
+  dir1: 'down',
+  dir2: 'right',
+  firstpos1: 30,
+  firstpos2: 1050,
+});
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
@@ -24,6 +31,7 @@ info({
   title: 'Features on the page',
   text: 'Please note that you can open large version of the image. Enjoy!',
   delay: 4000,
+  stack: myStack,
 });
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -38,12 +46,18 @@ function onSearch(event) {
   picturesApiService
     .fetchPictures()
     .then(hits => {
-      if (picturesApiService.query !== hits.tags) {
-        return error({
+      console.log(picturesApiService.query);
+      if (hits.length === 0) {
+        myStack.close();
+        error({
           title: 'Nothing found',
           text: 'Please enter more specific query',
           delay: 4000,
+          stack: myStack,
         });
+        clearGalleryContainer();
+        refs.loadMoreBtn.classList.add('is-hidden');
+        return;
       }
       clearGalleryContainer();
       appendPicturesMarkup(hits);
