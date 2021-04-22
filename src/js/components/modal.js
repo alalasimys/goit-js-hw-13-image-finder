@@ -1,14 +1,17 @@
-(() => {
-  const refs = {
-    openModalBtn: document.querySelector('[data-modal-open]'),
-    closeModalBtn: document.querySelector('[data-modal-close]'),
-    modal: document.querySelector('[data-modal]'),
-  };
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basiclightbox.min.css';
 
-  refs.openModalBtn.addEventListener('click', toggleModal);
-  refs.closeModalBtn.addEventListener('click', toggleModal);
-
-  function toggleModal() {
-    refs.modal.classList.toggle('is-hidden');
+export default function onOpenModalImage(event) {
+  const isImgEl = event.target.classList.contains('gallery__image');
+  if (!isImgEl) {
+    return;
   }
-})();
+  const largeImageURL = event.target.getAttribute('data-large-image-url');
+
+  const instance = basicLightbox.create(
+    `
+    <img width="1400" height="900" src=${largeImageURL}>
+  `,
+  );
+  instance.show();
+}

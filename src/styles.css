@@ -152,8 +152,12 @@ body {
 .is-hidden {
   display: none;
 }
-
-[data-pnotify] .brighttheme-container {
+[data-pnotify] .brighttheme-info {
   background-color: rgb(199, 32, 135);
   color: #fff;
+}
+
+[data-pnotify] .brighttheme-error {
+  background-color: rgb(199, 32, 32);
+  color: rgb(0, 0, 0);
 }
