@@ -42,11 +42,12 @@ function onSearch(event) {
   event.preventDefault();
 
   picturesApiService.query = event.currentTarget.elements.query.value;
+
   picturesApiService.resetPage();
+
   picturesApiService
     .fetchPictures()
     .then(hits => {
-      console.log(picturesApiService.query);
       if (hits.length === 0) {
         myStack.close();
         error({
