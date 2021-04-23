@@ -25,8 +25,6 @@ const refs = {
 
 const picturesApiService = new PicturesApiServices();
 
-// console.log(picturesApiService);
-
 info({
   title: 'Features on the page',
   text: 'Please note that you can open large version of the image. Enjoy!',
@@ -38,37 +36,37 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.galleryContainer.addEventListener('click', onOpenModalImage);
 
-function onSearch(event) {
+async function onSearch(event) {
   event.preventDefault();
 
   picturesApiService.query = event.currentTarget.elements.query.value;
 
   picturesApiService.resetPage();
 
-  picturesApiService
-    .fetchPictures()
-    .then(hits => {
-      if (hits.length === 0) {
-        myStack.close();
-        error({
-          title: 'Nothing found',
-          text: 'Please enter more specific query',
-          delay: 4000,
-          stack: myStack,
-        });
-        clearGalleryContainer();
-        refs.loadMoreBtn.classList.add('is-hidden');
-        return;
-      }
-      clearGalleryContainer();
-      appendPicturesMarkup(hits);
-      refs.loadMoreBtn.classList.remove('is-hidden');
-    })
-    .catch(console.log);
+  const response = await picturesApiService.fetchPictures();
+
+  if (response.length === 0) {
+    myStack.close();
+    error({
+      title: 'Nothing found',
+      text: 'Please enter more specific query',
+      delay: 4000,
+      stack: myStack,
+    });
+    clearGalleryContainer();
+    refs.loadMoreBtn.classList.add('is-hidden');
+    return;
+  }
+
+  clearGalleryContainer();
+  appendPicturesMarkup(response);
+  refs.loadMoreBtn.classList.remove('is-hidden');
 }
 
-function onLoadMore() {
-  picturesApiService.fetchPictures().then(appendPicturesMarkup).then(scrollTo);
+async function onLoadMore() {
+  const response = await picturesApiService.fetchPictures();
+  appendPicturesMarkup(response);
+  scrollTo();
 }
 
 function scrollTo() {

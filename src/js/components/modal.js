@@ -14,4 +14,10 @@ export default function onOpenModalImage(event) {
   `,
   );
   instance.show();
+
+  window.addEventListener('keyup', event => {
+    if (event.key === 'Escape') {
+      instance.close();
+    }
+  });
 }

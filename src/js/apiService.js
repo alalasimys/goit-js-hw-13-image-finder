@@ -4,18 +4,16 @@ export default class PicturesApiServices {
     this.page = 1;
   }
 
-  fetchPictures() {
+  async fetchPictures() {
     const API_KEY = '21244519-50cd1518df4ac35a1fd6e5fdb';
     const BASE_URL = 'https://pixabay.com/api/';
 
-    return fetch(
+    const response = await fetch(
       `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`,
-    )
-      .then(response => response.json())
-      .then(({ hits }) => {
-        this.incrementPage();
-        return hits;
-      });
+    );
+    const pics = await response.json();
+    this.incrementPage();
+    return pics.hits;
   }
 
   incrementPage() {
