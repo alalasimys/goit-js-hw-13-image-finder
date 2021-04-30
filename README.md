@@ -2,7 +2,7 @@
 
 ## General info
 
-This project is small application to search and view images by keyword.
+This project is small application to search and view images by keyword .
 
 ## Technologies
 
