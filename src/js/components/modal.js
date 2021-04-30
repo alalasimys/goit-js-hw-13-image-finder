@@ -15,9 +15,15 @@ export default function onOpenModalImage(event) {
   );
   instance.show();
 
-  window.addEventListener('keyup', event => {
+  const escapeListener = event => {
     if (event.key === 'Escape') {
       instance.close();
+      console.log(event.key);
+      if (instance.close()) {
+        window.removeEventListener('keyup', escapeListener);
+      }
     }
-  });
+  };
+
+  window.addEventListener('keyup', escapeListener);
 }
