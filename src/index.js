@@ -9,7 +9,6 @@ import './styles.css';
 import pictureCardTmpl from './templates/pictureCardTmpl.hbs';
 import PicturesApiServices from './js/apiService';
 import onOpenModalImage from './js/components/modal';
-// import './js/io';
 
 const myStack = new Stack({
   dir1: 'down',
@@ -76,6 +75,7 @@ function clearGalleryContainer() {
   refs.galleryContainer.innerHTML = '';
 }
 
+/* ---Infinite Scroll */
 const onEntry = entries =>
   entries.forEach(async entry => {
     if (entry.isIntersecting && picturesApiService.query !== '') {
